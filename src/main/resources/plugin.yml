@@ -1,0 +1,5 @@
+name: Chess
+version: '${project.version}'
+main: eu.baumistlustig.chess.Chess
+api-version: 1.19
+authors: [ Baumistlustig ]
