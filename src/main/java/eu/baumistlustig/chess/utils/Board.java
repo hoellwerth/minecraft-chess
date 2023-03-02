@@ -1,6 +1,5 @@
 package eu.baumistlustig.chess.utils;
 
-import eu.baumistlustig.chess.commands.Test;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
@@ -19,14 +18,7 @@ public class Board implements Listener {
     private final Inventory inv;
 
     public Board() {
-        // Create a new inventory, with no owner (as this isn't a real inventory), a size of nine, called example
         inv = Bukkit.createInventory(null, 45, "Chess Board");
-
-        Test test = new Test();
-
-        Player p = test.player;
-
-        // Put the items into the inventory
     }
 
     public void initializeBoard() {
@@ -69,7 +61,6 @@ public class Board implements Listener {
         player.getInventory().setItem(34, createGuiItem(Material.LIME_CONCRETE, "Rook", "This is white's h rook"));
     }
 
-    // Nice little method to create a gui item with a custom name, and description
     protected ItemStack createGuiItem(final Material material, final String name, final String... lore) {
         final ItemStack item = new ItemStack(material, 1);
         final ItemMeta meta = item.getItemMeta();
