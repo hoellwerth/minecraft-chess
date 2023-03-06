@@ -1,13 +1,14 @@
 package eu.baumistlustig.chess.utils;
 
 import eu.baumistlustig.chess.Chess;
+import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Timer {
     private boolean gameRunning;
-    private int gameTime;
+    private double gameTime;
 
-    public Timer (boolean gameRunning, int gameTime) {
+    public Timer (boolean gameRunning, float gameTime) {
         this.gameRunning = gameRunning;
         this.gameTime = gameTime;
         run();
@@ -21,11 +22,11 @@ public class Timer {
         this.gameRunning = running;
     }
 
-    public int getTime() {
+    public double getTime() {
         return gameTime;
     }
 
-    public void setTime(int time) {
+    public void setTime(double time) {
         this.gameTime = time;
     }
 
@@ -44,8 +45,9 @@ public class Timer {
                     return;
                 }
 
-                setTime(getTime() - 1);
+                setTime(getTime() - 0.1);
+                Bukkit.broadcastMessage(String.valueOf(Math.round(getTime() * 10.0) / 10.0));
             }
-        }.runTaskTimer(Chess.getInstance(), 0, 20);
+        }.runTaskTimer(Chess.getInstance(), 0, 2);
     }
 }
