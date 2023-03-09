@@ -73,24 +73,57 @@ public class Board implements Listener {
         }
     }
 
-    public void initializePlayerInv(Player player) {
-        player.getInventory().setItem(18, itemBuilder.createGuiItem(Material.RED_CONCRETE, "Pawn", "This is white's a pawn"));
-        player.getInventory().setItem(19, itemBuilder.createGuiItem(Material.RED_CONCRETE, "Pawn", "This is white's b pawn"));
-        player.getInventory().setItem(20, itemBuilder.createGuiItem(Material.RED_CONCRETE, "Pawn", "This is white's c pawn"));
-        player.getInventory().setItem(21, itemBuilder.createGuiItem(Material.RED_CONCRETE, "Pawn", "This is white's d pawn"));
-        player.getInventory().setItem(22, itemBuilder.createGuiItem(Material.RED_CONCRETE, "Pawn", "This is white's e pawn"));
-        player.getInventory().setItem(23, itemBuilder.createGuiItem(Material.RED_CONCRETE, "Pawn", "This is white's f pawn"));
-        player.getInventory().setItem(24, itemBuilder.createGuiItem(Material.RED_CONCRETE, "Pawn", "This is white's g pawn"));
-        player.getInventory().setItem(25, itemBuilder.createGuiItem(Material.RED_CONCRETE, "Pawn", "This is white's h pawn"));
-        player.getInventory().setItem(27, itemBuilder.createGuiItem(Material.LIME_CONCRETE, "Rook", "This is white's a rook"));
+    public void updatePlayerInv(Player player) {
 
-        player.getInventory().setItem(28, itemBuilder.createGuiItem(Material.ORANGE_CONCRETE, "Knight", "This is white's b knight"));
-        player.getInventory().setItem(29, itemBuilder.createGuiItem(Material.YELLOW_CONCRETE, "Bishop", "This is white's white bishop"));
-        player.getInventory().setItem(30, itemBuilder.createGuiItem(Material.GREEN_CONCRETE, "Queen", "White's queen"));
-        player.getInventory().setItem(31, itemBuilder.createGuiItem(Material.CYAN_CONCRETE, "King", "White's king"));
-        player.getInventory().setItem(32, itemBuilder.createGuiItem(Material.YELLOW_CONCRETE, "Bishop", "This is white's black bishop"));
-        player.getInventory().setItem(33, itemBuilder.createGuiItem(Material.ORANGE_CONCRETE, "Knight", "This is white's g knight"));
-        player.getInventory().setItem(34, itemBuilder.createGuiItem(Material.LIME_CONCRETE, "Rook", "This is white's h rook"));
+        int[][] invBoard = {
+                board[5],
+                board[6],
+                board[7],
+        };
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 9; j++) {
+
+                switch (invBoard[i][j]) {
+                    case 1:
+                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.RED_CONCRETE, "Pawn"));
+                        break;
+                    case 2:
+                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.ORANGE_CONCRETE, "Knight"));
+                        break;
+                    case 3:
+                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.YELLOW_CONCRETE, "Bishop"));
+                        break;
+                    case 4:
+                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.LIME_CONCRETE, "Rook"));
+                        break;
+                    case 5:
+                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.GREEN_CONCRETE, "Queen"));
+                        break;
+                    case 6:
+                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.CYAN_CONCRETE, "King"));
+                        break;
+                    case 7:
+                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.RED_WOOL, "Pawn"));
+                        break;
+                    case 8:
+                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.ORANGE_WOOL, "Knight"));
+                        break;
+                    case 9:
+                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.YELLOW_WOOL, "Bishop"));
+                        break;
+                    case 10:
+                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.LIME_WOOL, "Rook"));
+                        break;
+                    case 11:
+                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.GREEN_WOOL, "Queen"));
+                        break;
+                    case 12:
+                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.CYAN_WOOL, "King"));
+                        break;
+                }
+            }
+        }
     }
 
     // You can open the inventory with this
@@ -99,6 +132,6 @@ public class Board implements Listener {
 
         updateBoard();
 
-        initializePlayerInv((Player) ent);
+        updatePlayerInv((Player) ent);
     }
 }
