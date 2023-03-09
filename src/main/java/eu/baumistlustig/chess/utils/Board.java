@@ -16,24 +16,61 @@ public class Board implements Listener {
 
     ItemBuilder itemBuilder = new ItemBuilder();
 
-    public void initializeBoard() {
-        inv.setItem(0, itemBuilder.createGuiItem(Material.LIME_CONCRETE, "Rook", "This is black's a rook"));
-        inv.setItem(1, itemBuilder.createGuiItem(Material.ORANGE_CONCRETE, "Knight", "This is black's b knight"));
-        inv.setItem(2, itemBuilder.createGuiItem(Material.YELLOW_CONCRETE, "Bishop", "This is black's white bishop"));
-        inv.setItem(3, itemBuilder.createGuiItem(Material.GREEN_CONCRETE, "Queen", "Black's queen"));
-        inv.setItem(4, itemBuilder.createGuiItem(Material.CYAN_CONCRETE, "King", "Black's king"));
-        inv.setItem(5, itemBuilder.createGuiItem(Material.YELLOW_CONCRETE, "Bishop", "This is black's black bishop"));
-        inv.setItem(6, itemBuilder.createGuiItem(Material.ORANGE_CONCRETE, "Knight", "This is black's g knight"));
-        inv.setItem(7, itemBuilder.createGuiItem(Material.LIME_CONCRETE, "Rook", "This is black's h rook"));
+    int[][] board = {
+            { 10, 8, 9, 11, 12, 9, 8, 10, 0 },
+            { 7, 7, 7, 7, 7, 7, 7, 7, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 0 },
+            { 4, 2, 3, 5, 6, 3, 2, 4, 0 },
+    };
 
-        inv.setItem(9, itemBuilder.createGuiItem(Material.RED_CONCRETE, "Pawn", "This is black's a pawn"));
-        inv.setItem(10, itemBuilder.createGuiItem(Material.RED_CONCRETE, "Pawn", "This is black's b pawn"));
-        inv.setItem(11, itemBuilder.createGuiItem(Material.RED_CONCRETE, "Pawn", "This is black's c pawn"));
-        inv.setItem(12, itemBuilder.createGuiItem(Material.RED_CONCRETE, "Pawn", "This is black's d pawn"));
-        inv.setItem(13, itemBuilder.createGuiItem(Material.RED_CONCRETE, "Pawn", "This is black's e pawn"));
-        inv.setItem(14, itemBuilder.createGuiItem(Material.RED_CONCRETE, "Pawn", "This is black's f pawn"));
-        inv.setItem(15, itemBuilder.createGuiItem(Material.RED_CONCRETE, "Pawn", "This is black's g pawn"));
-        inv.setItem(16, itemBuilder.createGuiItem(Material.RED_CONCRETE, "Pawn", "This is black's h pawn"));
+    public void updateBoard() {
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 8; j++) {
+                switch (board[i][j]) {
+                    case 1:
+                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.RED_CONCRETE, "Pawn"));
+                        break;
+                    case 2:
+                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.ORANGE_CONCRETE, "Knight"));
+                        break;
+                    case 3:
+                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.YELLOW_CONCRETE, "Bishop"));
+                        break;
+                    case 4:
+                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.LIME_CONCRETE, "Rook"));
+                        break;
+                    case 5:
+                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.GREEN_CONCRETE, "Queen"));
+                        break;
+                    case 6:
+                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.CYAN_CONCRETE, "King"));
+                        break;
+                    case 7:
+                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.RED_WOOL, "Pawn"));
+                        break;
+                    case 8:
+                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.ORANGE_WOOL, "Knight"));
+                        break;
+                    case 9:
+                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.YELLOW_WOOL, "Bishop"));
+                        break;
+                    case 10:
+                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.LIME_WOOL, "Rook"));
+                        break;
+                    case 11:
+                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.GREEN_WOOL, "Queen"));
+                        break;
+                    case 12:
+                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.CYAN_WOOL, "King"));
+                        break;
+                }
+            }
+        }
     }
 
     public void initializePlayerInv(Player player) {
@@ -60,34 +97,8 @@ public class Board implements Listener {
     public void openInventory(final HumanEntity ent) {
         ent.openInventory(inv);
 
-        initializeBoard();
+        updateBoard();
 
         initializePlayerInv((Player) ent);
     }
-
-    // Check for clicks on items
-    /*@EventHandler
-    public void onInventoryClick(final InventoryClickEvent e) {
-        if (!e.getInventory().equals(inv)) return;
-
-        e.setCancelled(true);
-
-        final ItemStack clickedItem = e.getCurrentItem();
-
-        // verify current item is not null
-        if (clickedItem == null || clickedItem.getType().isAir()) return;
-
-        final Player p = (Player) e.getWhoClicked();
-
-        // Using slots click is the best option for your inventory click's
-        p.sendMessage("You clicked at slot " + e.getRawSlot());
-    }
-
-    // Cancel dragging in our inventory
-    @EventHandler
-    public void onInventoryClick(final InventoryDragEvent e) {
-        if (e.getInventory().equals(inv)) {
-            e.setCancelled(true);
-        }
-    }*/
 }
