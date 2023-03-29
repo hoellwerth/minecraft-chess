@@ -18,57 +18,59 @@ public class Board implements Listener {
 
     int[][] board = {
             { 10, 8, 9, 11, 12, 9, 8, 10, 0 },
-            { 7, 7, 7, 7, 7, 7, 7, 7, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 1, 1, 1, 1, 1, 1, 1, 1, 0 },
+            { 7, 7, 0, 0, 0, 0, 7, 7, 0 },
+            { 0, 0, 7, 0, 0, 7, 0, 0, 0 },
+            { 0, 0, 0, 7, 7, 0, 0, 0, 0 },
+            { 0, 0, 0, 1, 1, 0, 0, 0, 0 },
+            { 0, 0, 1, 0, 0, 1, 0, 0, 0 },
+            { 1, 1, 0, 0, 0, 0, 1, 1, 0 },
             { 4, 2, 3, 5, 6, 3, 2, 4, 0 },
+    };
+
+    Material[] pieces = {
+            Material.RED_CONCRETE,
+            Material.ORANGE_CONCRETE,
+            Material.YELLOW_CONCRETE,
+            Material.LIME_CONCRETE,
+            Material.GREEN_CONCRETE,
+            Material.CYAN_CONCRETE,
+            Material.RED_WOOL,
+            Material.ORANGE_WOOL,
+            Material.YELLOW_WOOL,
+            Material.LIME_WOOL,
+            Material.GREEN_WOOL,
+            Material.CYAN_WOOL,
+    };
+
+    String[] pieceNames = {
+            "White Pawn",
+            "White Knight",
+            "White Bishop",
+            "White Rook",
+            "White Queen",
+            "White King",
+            "Black Pawn",
+            "Black Knight",
+            "Black Bishop",
+            "Black Rook",
+            "Black Queen",
+            "Black King",
     };
 
     public void updateBoard() {
 
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 8; j++) {
-                switch (board[i][j]) {
-                    case 1:
-                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.RED_CONCRETE, "Pawn"));
-                        break;
-                    case 2:
-                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.ORANGE_CONCRETE, "Knight"));
-                        break;
-                    case 3:
-                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.YELLOW_CONCRETE, "Bishop"));
-                        break;
-                    case 4:
-                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.LIME_CONCRETE, "Rook"));
-                        break;
-                    case 5:
-                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.GREEN_CONCRETE, "Queen"));
-                        break;
-                    case 6:
-                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.CYAN_CONCRETE, "King"));
-                        break;
-                    case 7:
-                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.RED_WOOL, "Pawn"));
-                        break;
-                    case 8:
-                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.ORANGE_WOOL, "Knight"));
-                        break;
-                    case 9:
-                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.YELLOW_WOOL, "Bishop"));
-                        break;
-                    case 10:
-                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.LIME_WOOL, "Rook"));
-                        break;
-                    case 11:
-                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.GREEN_WOOL, "Queen"));
-                        break;
-                    case 12:
-                        inv.setItem((i * 9) + j, itemBuilder.createGuiItem(Material.CYAN_WOOL, "King"));
-                        break;
+        for (int row = 0; row < 5; row++) {
+            for (int file = 0; file < 8; file++) {
+                if (board[row][file] == 0) {
+                    continue;
                 }
+
+                inv.setItem(row * 9 + file,
+                        itemBuilder.createGuiItem(
+                                pieces[board[row][file] - 1],
+                                pieceNames[board[row][file] - 1]
+                        )
+                );
             }
         }
     }
@@ -81,49 +83,25 @@ public class Board implements Listener {
                 board[7],
         };
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int row = 0; row < 3; row++) {
+            for (int file = 0; file < 9; file++) {
 
-                switch (invBoard[i][j]) {
-                    case 1:
-                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.RED_CONCRETE, "Pawn"));
-                        break;
-                    case 2:
-                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.ORANGE_CONCRETE, "Knight"));
-                        break;
-                    case 3:
-                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.YELLOW_CONCRETE, "Bishop"));
-                        break;
-                    case 4:
-                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.LIME_CONCRETE, "Rook"));
-                        break;
-                    case 5:
-                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.GREEN_CONCRETE, "Queen"));
-                        break;
-                    case 6:
-                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.CYAN_CONCRETE, "King"));
-                        break;
-                    case 7:
-                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.RED_WOOL, "Pawn"));
-                        break;
-                    case 8:
-                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.ORANGE_WOOL, "Knight"));
-                        break;
-                    case 9:
-                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.YELLOW_WOOL, "Bishop"));
-                        break;
-                    case 10:
-                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.LIME_WOOL, "Rook"));
-                        break;
-                    case 11:
-                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.GREEN_WOOL, "Queen"));
-                        break;
-                    case 12:
-                        player.getInventory().setItem((j) + (i * 9) + 9, itemBuilder.createGuiItem(Material.CYAN_WOOL, "King"));
-                        break;
+                if (invBoard[row][file] == 0) {
+                    continue;
                 }
+
+                player.getInventory().setItem((file) + (row * 9) + 9,
+                        itemBuilder.createGuiItem(
+                                pieces[invBoard[row][file] - 1],
+                                pieceNames[invBoard[row][file] - 1]
+                        )
+                );
             }
         }
+    }
+
+    public int[][] getBoard() {
+        return board;
     }
 
     // You can open the inventory with this
