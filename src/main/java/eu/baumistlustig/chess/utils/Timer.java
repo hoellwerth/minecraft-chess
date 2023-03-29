@@ -39,7 +39,7 @@ public class Timer {
                     return;
                 }
 
-                if (getTime() <= 0) {
+                if (getTime() == 0.1) {
                     setRunning(false);
                     cancel();
                     return;
